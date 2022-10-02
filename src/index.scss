@@ -6,49 +6,52 @@
   font-family: "Roboto", -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
   'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
   sans-serif;
-  // шрифты брал с Google Fonts, линк всавить в index.html
-
--webkit-font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.todo{
+.todo {
   position: absolute;
+  width: 750px;
+  height: 530px;
   left: 50%;
   top: 50%;
-  width: 750px;
-  height:530px;
   transform: translate(-50%, -50%);
-  box-shadow:1px 5px 20px #e8e897;
+  box-shadow: 1px 5px 20px #e5e5d7;
   border-radius: 10px;
-  border: 1px solid #ff0404;
-font-size:14px ;
+  border: 1px solid #d0c1c1;
+  font-size: 14px;
 }
 .todo__sidebar {
-  background-color: #bcea93;
+  box-sizing: border-box;
+  background-color: #dae1cf;
   width: 200px;
   height: 100%;
-  border-right: 1px solid #0000ff;
-  padding: 60px 20px ;
-
+  border-right: 1px solid #d9d9ec;
+  padding: 60px 20px;
+  border-radius: 10px;
 }
-.todo__list li {
-    display: flex;
-    align-items: center;
-
-  cursor: pointer;
-
-// тут переход на sass 'npm install sass' or 'yarn add sass'
-&.active {
+.field {
+  padding: 8px 12px;
   background: #FFFFFF;
-  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.05);
+  border: 1px solid #EFEFEF;
   border-radius: 4px;
-  padding: 10px 12px;
-}}
-.todo__list li i {
-  display: inline;
-  margin-right: 10px;
-
+  box-sizing: border-box;
+width: 100%;
+  &:focus {
+  border-color: #525252;
 }
-.todo__sidebar i svg path {
-  fill: #ea8989;
+}
+.button {
+  color: #ffffff;
+  background: #85e8bb;
+  border-radius: 4px;
+  border:0px;
+padding: 10px 20px;
+  cursor: pointer;
+&:hover{
+  background: darken( #7ad2ad, 6%);
+}
+  &:active{
+    background: darken( #92e3bd, 12%);
+  }
 }
