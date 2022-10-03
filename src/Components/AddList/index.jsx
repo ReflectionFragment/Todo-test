@@ -8,7 +8,16 @@ import closeSvg from '../../assets/img/close.svg';
 const AddList = ({colors}) => {
     const [visiblePopup, setPopup] = useState(false);
     const [selectedColor, selectColor] = useState(colors[0].id);
-
+    const [inputValue, setInputValue] = useState('');
+    const addList = () => {
+        if (!inputValue) {
+            alert('Введите название списка');
+            return;
+        }
+        console.log({"id": 1,
+            "name": "Продажи",
+            "colorId": 5})
+    };
     return (
         <div className='add-list'>
             <List onClick={() => setPopup(true)}
@@ -31,8 +40,17 @@ const AddList = ({colors}) => {
                         onClick={()=>setPopup(false)}
                         src={closeSvg}
                         alt='x'
-                        className='add-list__popup-close-btn'/>
-                    <input className='field' type='text' placeholder='название'/>
+                        className='add-list__popup-close-btn'
+                    />
+
+                    <input
+                            value={inputValue}
+                            onChange= {e=>setInputValue(e.target.value)}
+                            className='field'
+                           type='text'
+                           placeholder='название'
+                    />
+
                     <div className='add-list__popup-colors'>
                         {colors.map((color) => {
                             // console.log(color.id);
@@ -45,7 +63,7 @@ const AddList = ({colors}) => {
                         })
                         }
                     </div>
-                    <button className='button'>Add</button>
+                    <button onClick={addList} className='button'>Add</button>
                 </div>
             )}
         </div>

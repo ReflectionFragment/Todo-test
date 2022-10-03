@@ -2,8 +2,13 @@ import List from "./Components/List/List";
 import React from "react";
 import AddList from "./Components/AddList";
 import DB from './assets/db.json';
+import {useState} from "react";
 
 function App() {
+    const [lists, setLists] = useState(DB.lists.map(item=>{
+        item.color= DB.colors.filter( color=> color.id===item.colorId)[0].name;
+        return item;
+    }))
     return (
         <div className="todo">
             <div className="todo__sidebar">
@@ -23,23 +28,8 @@ function App() {
             ]}
             />
             <List
-                items={[
-                {
-                    color: "green",
-                    name: "state",
-                    active: true
-                },
-                {
-                    color: "blue",
-                    name: "front",
-                },
-                {
-                    color: "red",
-                    name: "anywere"
-                }
-
-            ]}
-                  isRemovable
+                items = {lists}
+                isRemovable
             />
                 <AddList colors={DB.colors}/>
             </div>
