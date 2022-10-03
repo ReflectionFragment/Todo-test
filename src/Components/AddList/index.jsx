@@ -28,6 +28,7 @@ const AddList = ({colors}) => {
             {visiblePopup && (
                 <div className='add-list__popup'>
                     <img
+                        onClick={()=>setPopup(false)}
                         src={closeSvg}
                         alt='x'
                         className='add-list__popup-close-btn'/>
