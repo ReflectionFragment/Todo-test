@@ -4,23 +4,36 @@ import './AddList.scss';
 import Badge from "../Badge";
 
 import closeSvg from '../../assets/img/close.svg';
+import DB from "../../assets/db.json";
 
-const AddList = ({colors}) => {
-    const [visiblePopup, setPopup] = useState(false);
+const AddList = ({colors, onAdd}) => {
+    const [visiblePopup, setVisiblePopup] = useState(false);
     const [selectedColor, selectColor] = useState(colors[0].id);
     const [inputValue, setInputValue] = useState('');
+
+    const onClose = () => {
+        setVisiblePopup(false);
+        setInputValue('');
+        selectColor(colors[0].id);
+    }
+
     const addList = () => {
         if (!inputValue) {
             alert('Введите название списка');
             return;
         }
-        console.log({"id": 1,
-            "name": "Продажи",
-            "colorId": 5})
+        const color = colors.filter(c => c.id === selectedColor)[0].name;
+        onAdd({
+            id: Math.random(),
+            name: inputValue,
+            color
+        });
+        onClose();
     };
+
     return (
         <div className='add-list'>
-            <List onClick={() => setPopup(true)}
+            <List onClick={() => setVisiblePopup(true)}
                   items={[{
                       className: 'list__addButton',
 
@@ -37,18 +50,18 @@ const AddList = ({colors}) => {
             {visiblePopup && (
                 <div className='add-list__popup'>
                     <img
-                        onClick={()=>setPopup(false)}
+                        onClick={onClose}
                         src={closeSvg}
                         alt='x'
                         className='add-list__popup-close-btn'
                     />
 
                     <input
-                            value={inputValue}
-                            onChange= {e=>setInputValue(e.target.value)}
-                            className='field'
-                           type='text'
-                           placeholder='название'
+                        value={inputValue}
+                        onChange={e => setInputValue(e.target.value)}
+                        className='field'
+                        type='text'
+                        placeholder='название'
                     />
 
                     <div className='add-list__popup-colors'>
