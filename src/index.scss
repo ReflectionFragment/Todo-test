@@ -10,6 +10,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 .todo {
+  display: flex;
   position: absolute;
   width: 750px;
   height: 530px;
@@ -20,8 +21,8 @@
   border-radius: 10px;
   border: 1px solid #c1c8d0;
   font-size: 14px;
-}
-.todo__sidebar {
+
+&__sidebar {
   box-sizing: border-box;
   background-color: #dedede;
   width: 200px;
@@ -30,6 +31,10 @@
   padding: 60px 20px;
   border-radius: 10px;
 }
+&__tasks{
+  flex:1;
+  padding: 60px;
+}}
 .field {
   padding: 8px 12px;
   background: #FFFFFF;

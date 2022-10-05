@@ -25,7 +25,7 @@ const List = ({onRemove, items, isRemovable, onClick}) => {
                     {isRemovable && <img className='list__remove-icon'
                                          src={removeSvg}
                                          alt='remove'
-                                         onClick={(item)=>removeList(item)}
+                                         onClick={()=>removeList(item)}
                     />}
 
                 </li>
