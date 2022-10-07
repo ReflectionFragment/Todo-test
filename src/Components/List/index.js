@@ -5,7 +5,7 @@ import Badge from "../Badge";
 import removeSvg from '../../assets/img/remove.svg';
 
 
-const List = ({onRemove, items, isRemovable, onClick}) => {
+const Index = ({onRemove, items, isRemovable, onClick}) => {
     const removeList = (item) => {
         if (window.confirm('da?')){
             onRemove(item);
@@ -34,4 +34,4 @@ const List = ({onRemove, items, isRemovable, onClick}) => {
     );
 }
 
-export default List;
+export default Index;

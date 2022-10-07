@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import List from "../List/List";
+import React, {useEffect, useState} from "react";
+import Index from "../List";
 import './AddList.scss';
 import Badge from "../Badge";
 
@@ -11,6 +11,11 @@ const AddList = ({colors, onAdd}) => {
     const [selectedColor, selectColor] = useState(colors[0].id);
     const [inputValue, setInputValue] = useState('');
 
+    useEffect(()=>{
+        if (Array.isArray(colors)){
+            selectColor(colors[0].id)
+        }
+    })
     const onClose = () => {
         setVisiblePopup(false);
         setInputValue('');
@@ -33,8 +38,8 @@ const AddList = ({colors, onAdd}) => {
 
     return (
         <div className='add-list'>
-            <List onClick={() => setVisiblePopup(true)}
-                  items={[{
+            <Index onClick={() => setVisiblePopup(true)}
+                   items={[{
                       className: 'list__addButton',
 
                       icon: (<svg width="13" height="13" viewBox="0 0 16 16" fill="none"
