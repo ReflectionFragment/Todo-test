@@ -1,90 +1,109 @@
 import React, {useEffect, useState} from "react";
-import Index from "../List";
-import './AddList.scss';
+import axios from "axios";
+
+import List from "../List";
 import Badge from "../Badge";
 
 import closeSvg from '../../assets/img/close.svg';
-import DB from "../../assets/db.json";
+
+import './AddList.scss';
+
 
 const AddList = ({colors, onAdd}) => {
     const [visiblePopup, setVisiblePopup] = useState(false);
-    const [selectedColor, selectColor] = useState(colors[0].id);
+    const [seletedColor, selectColor] = useState(3);
     const [inputValue, setInputValue] = useState('');
+    const [isloading, setIsLoading] = useState(false);
 
-    useEffect(()=>{
-        if (Array.isArray(colors)){
-            selectColor(colors[0].id)
+    useEffect(() => {
+        if (Array.isArray(colors) && colors.length > 0) {
+            selectColor(colors[0].id);
         }
-    })
+    }, [colors]);
+
     const onClose = () => {
         setVisiblePopup(false);
         setInputValue('');
         selectColor(colors[0].id);
     }
 
-    const addList = () => {
-        if (!inputValue) {
-            alert('Введите название списка');
-            return;
-        }
-        const color = colors.filter(c => c.id === selectedColor)[0].name;
-        onAdd({
-            id: Math.random(),
-            name: inputValue,
-            color
-        });
-        onClose();
-    };
+        const addList = () => {
+            if (!inputValue) {
+                alert('Введите название списка');
+                return;
+            }
+            setIsLoading(true);
+            axios
+                .post('http://localhost:3001/lists', {
+                    name: inputValue,
+                    colorId: seletedColor
+                })
+                .then(({ data }) => {
+                    const color = colors.filter(c => c.id === seletedColor)[0];
+                    const listObj = { ...data, color, tasks: [] };
+                    onAdd(listObj);
+                    onClose();
+                })
+                .catch(() => {
+                    alert('Ошибка при добавлении списка!');
+                })
+                .finally(() => {
+                    setIsLoading(false);
+                });
+        };
+return (
+    <div className='add-list'>
+        <List
+            onClick={() => setVisiblePopup(true)}
+            items={[{
+                className: 'list__addButton',
 
-    return (
-        <div className='add-list'>
-            <Index onClick={() => setVisiblePopup(true)}
-                   items={[{
-                      className: 'list__addButton',
+                icon: (<svg width="13" height="13" viewBox="0 0 16 16" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 1V15" stroke="black" strokeWidth="2" strokeLinecap="round"
+                          strokeLinejoin="round"/>
+                    <path d="M1 8H15" stroke="black" strokeWidth="2" strokeLinecap="round"
+                          strokeLinejoin="round"/>
+                </svg>),
+                name: "Add task"
+            }]}
+        />
+        {visiblePopup && (
+            <div className='add-list__popup'>
+                <img
+                    onClick={onClose}
+                    src={closeSvg}
+                    alt='x'
+                    className='add-list__popup-close-btn'
+                />
 
-                      icon: (<svg width="13" height="13" viewBox="0 0 16 16" fill="none"
-                                  xmlns="http://www.w3.org/2000/svg">
-                          <path d="M8 1V15" stroke="black" strokeWidth="2" strokeLinecap="round"
-                                strokeLinejoin="round"/>
-                          <path d="M1 8H15" stroke="black" strokeWidth="2" strokeLinecap="round"
-                                strokeLinejoin="round"/>
-                      </svg>),
-                      name: "Add task"
-                  }]}
-            />
-            {visiblePopup && (
-                <div className='add-list__popup'>
-                    <img
-                        onClick={onClose}
-                        src={closeSvg}
-                        alt='x'
-                        className='add-list__popup-close-btn'
-                    />
+                <input
+                    value={inputValue}
+                    onChange={e => setInputValue(e.target.value)}
+                    className='field'
+                    type='text'
+                    placeholder='название'
+                />
 
-                    <input
-                        value={inputValue}
-                        onChange={e => setInputValue(e.target.value)}
-                        className='field'
-                        type='text'
-                        placeholder='название'
-                    />
+                <div className='add-list__popup-colors'>
+                    {colors.map((color) => {
+                        return <Badge onClick={() => selectColor(color.id)}
+                                      key={color.id}
+                                      color={color.name}
+                                      className={seletedColor === color.id && 'active'}
 
-                    <div className='add-list__popup-colors'>
-                        {colors.map((color) => {
-                            // console.log(color.id);
-                            return <Badge onClick={() => selectColor(color.id)}
-                                          key={color.id}
-                                          color={color.name}
-                                          className={selectedColor === color.id && 'active'}
-
-                            />
-                        })
-                        }
-                    </div>
-                    <button onClick={addList} className='button'>Add</button>
+                        />
+                    })
+                    }
                 </div>
-            )}
-        </div>
-    );
-};
+                <button onClick={addList} className='button'>
+                    {isloading ? 'Добавление' : 'Добавить'}
+                </button>
+
+            </div>
+        )}
+    </div>
+);
+}
+;
 export default AddList;

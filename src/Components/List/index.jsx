@@ -3,12 +3,15 @@ import classnames from "classnames";
 import Badge from "../Badge";
 
 import removeSvg from '../../assets/img/remove.svg';
+import axios from "axios";
 
 
-const Index = ({onRemove, items, isRemovable, onClick}) => {
+const List = ({onRemove, items, isRemovable, onClick}) => {
     const removeList = (item) => {
         if (window.confirm('da?')){
-            onRemove(item);
+            axios.delete('http://localhost:3001/lists/' + item.id).then(()=>{
+                onRemove(item.id);
+            })
         }};
     return (
         <ul
@@ -19,7 +22,7 @@ const Index = ({onRemove, items, isRemovable, onClick}) => {
                     key={index}
                     className={classnames(item.className, {'active': item.active})}>
                     <i>
-                        {item.icon ? (item.icon) : (<Badge color={item.color}/>)}
+                        {item.icon ? (item.icon) : (<Badge color={item.color.name}/>)}
                     </i>
                     <span>{item.name} </span>
                     {isRemovable && <img className='list__remove-icon'
@@ -34,4 +37,4 @@ const Index = ({onRemove, items, isRemovable, onClick}) => {
     );
 }
 
-export default Index;
+export default List;

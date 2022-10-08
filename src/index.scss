@@ -13,7 +13,7 @@
   display: flex;
   position: absolute;
   width: 750px;
-  height: 530px;
+  min-height: 530px;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
@@ -25,7 +25,7 @@
 &__sidebar {
   box-sizing: border-box;
   background-color: #dedede;
-  width: 200px;
+  width: 30%;
   height: 100%;
   border-right: 1px solid #92d9da;
   padding: 60px 20px;
@@ -33,7 +33,7 @@
 }
 &__tasks{
   flex:1;
-  padding: 60px;
+  padding: 5%;
 }}
 .field {
   padding: 8px 12px;
