@@ -9,9 +9,9 @@ function App() {
 //         return item;
 //     })
 //     );
-    const [lists, setLists] = useState  ([]);
-    const [colors, setColors] = useState([]);
-
+    const [lists, setLists] = useState(null);
+    const [colors, setColors] = useState(null);
+    const [activeItem, setActiveItem] = useState(null);
     useEffect(() => {
         axios
             .get('http://localhost:3001/lists?_expand=color&_embed=tasks').then(({ data }) => {
@@ -44,20 +44,27 @@ function App() {
                     }
                 ]}
                 />
+                {lists && lists.length > 0 ? (
                 <List
                     items={lists}
                     onRemove={id => { const newList = lists.filter(item => item.id !== id)
                         setLists( newList);
                     }}
+                    onClickItem={item=>{
+                        setActiveItem(item)
+                }}
+                    activeItem={activeItem}
                     isRemovable
                 />
+                    ) : ( <h2>Задач нет</h2>
+                )}
                 <AddList onAdd={onAddList}
                          colors={colors}
                 />
             </div>
 
             <div className="todo__tasks">
-                {lists.length > 0 && <Tasks todo={lists[1]}/>}
+                {lists && lists.length > 0 && activeItem && <Tasks todo={activeItem}/>}
             </div>
         </div>
 

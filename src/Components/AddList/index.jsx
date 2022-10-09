@@ -11,7 +11,7 @@ import './AddList.scss';
 
 const AddList = ({colors, onAdd}) => {
     const [visiblePopup, setVisiblePopup] = useState(false);
-    const [seletedColor, selectColor] = useState(3);
+    const [selectedColorId, selectColor] = useState(3);
     const [inputValue, setInputValue] = useState('');
     const [isloading, setIsLoading] = useState(false);
 
@@ -36,10 +36,10 @@ const AddList = ({colors, onAdd}) => {
             axios
                 .post('http://localhost:3001/lists', {
                     name: inputValue,
-                    colorId: seletedColor
+                    colorId: selectedColorId
                 })
                 .then(({ data }) => {
-                    const color = colors.filter(c => c.id === seletedColor)[0];
+                    const color = colors.find(c => c.id === selectedColorId);
                     const listObj = { ...data, color, tasks: [] };
                     onAdd(listObj);
                     onClose();
@@ -90,8 +90,7 @@ return (
                         return <Badge onClick={() => selectColor(color.id)}
                                       key={color.id}
                                       color={color.name}
-                                      className={seletedColor === color.id && 'active'}
-
+                                      className={selectedColorId === color.id && 'active'}
                         />
                     })
                     }

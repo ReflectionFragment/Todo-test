@@ -12,7 +12,10 @@ const Tasks = ({ todo }) => {
                 <img src={editSvg} alt='edit icon'/>
             </h2>
             <div className='tasks__items'>
-                {todo.tasks.map(task=> (
+                {todo.tasks && !todo.tasks.length && (
+                    <h2>Задачи отсутствуют</h2>
+                )}
+                {todo.tasks && todo.tasks.map(task=> (
                             <div key={task.id} className="tasks__items-row">
                         <div className='checkbox'>
                             <input id={`task-${task.id}`} type="checkbox"/>
@@ -30,7 +33,6 @@ const Tasks = ({ todo }) => {
                         <input readOnly value={task.text}/>
                     </div>  ))
                 }
-
             </div>
         </div>
     )
