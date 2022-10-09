@@ -2,14 +2,28 @@ import React from 'react';
 import './Tasks.scss';
 
 import editSvg from '../../assets/img/edit.svg';
+import axios from "axios";
+import AddTaskForm from "./AddTaskForm";
 
-const Tasks = ({ todo }) => {
+const Tasks = ({ todo, onEditTitle }) => {
+    const editTitle =()=> {
+       const newTitle = window.prompt ('Название, быстро', todo.name)
+        if (newTitle){
+            onEditTitle(todo.id, newTitle)
+            axios.patch ('http://localhost:3001/lists/' + todo.id, {
+                name: newTitle
+            }).catch(()=>{
+                alert('название твоё обновится не смогло')
+            })
+    }};
     return (
-
         <div className="tasks">
             <h2 className='tasks_title'>
                 {todo.name}
-                <img src={editSvg} alt='edit icon'/>
+                <img
+                    onClick={editTitle}
+                     src={editSvg} alt='edit icon'
+                />
             </h2>
             <div className='tasks__items'>
                 {todo.tasks && !todo.tasks.length && (
@@ -33,6 +47,7 @@ const Tasks = ({ todo }) => {
                         <input readOnly value={task.text}/>
                     </div>  ))
                 }
+                <AddTaskForm />
             </div>
         </div>
     )

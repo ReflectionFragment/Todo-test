@@ -62,18 +62,50 @@
 }
 
 .button {
-  color: #ffffff;
-  background: #85e8bb;
+  background: #4dd599;
   border-radius: 4px;
+  color: #fff;
   border: 0;
   padding: 10px 20px;
   cursor: pointer;
+  font-size: 14px;
 
   &:hover {
-    background: darken(#7ad2ad, 6%);
+    background: darken(#4dd599, 6%);
   }
 
   &:active {
-    background: darken(#92e3bd, 12%);
+    background: darken(#4dd599, 10%);
+  }
+
+  &:disabled {
+    background: #d8d8d8;
+  }
+
+  &--grey {
+    background: #f4f6f8;
+    color: #444444;
+
+    &:hover {
+      background: darken(#f4f6f8, 3%);
+    }
+
+    &:active {
+      background: darken(#f4f6f8, 6%);
+    }
+  }
+}
+
+.field {
+  background: #ffffff;
+  border: 1px solid #efefef;
+  box-sizing: border-box;
+  border-radius: 4px;
+  padding: 8px 12px;
+  width: 100%;
+  font-size: 14px;
+
+  &:focus {
+    border-color: #dbdbdb;
   }
 }

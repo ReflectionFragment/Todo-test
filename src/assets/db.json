@@ -1,14 +1,24 @@
 {
   "lists": [
     {
-      "name": "32443534255423462626256",
-      "colorId": 5,
-      "id": 1
-    },
-    {
-      "name": "234524",
+      "name": "wrefrefref",
       "colorId": 4,
       "id": 2
+    },
+    {
+      "name": "21",
+      "colorId": 4,
+      "id": 3
+    },
+    {
+      "name": "143",
+      "colorId": 5,
+      "id": 4
+    },
+    {
+      "name": "1234",
+      "colorId": 7,
+      "id": 5
     }
   ],
   "tasks": [],
