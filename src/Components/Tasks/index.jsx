@@ -5,7 +5,7 @@ import editSvg from '../../assets/img/edit.svg';
 import axios from "axios";
 import AddTaskForm from "./AddTaskForm";
 
-const Tasks = ({ todo, onEditTitle }) => {
+const Tasks = ({ todo, onEditTitle, onAddTask }) => {
     const editTitle =()=> {
        const newTitle = window.prompt ('Название, быстро', todo.name)
         if (newTitle){
@@ -47,7 +47,7 @@ const Tasks = ({ todo, onEditTitle }) => {
                         <input readOnly value={task.text}/>
                     </div>  ))
                 }
-                <AddTaskForm />
+                <AddTaskForm todo={todo} onAddTask={onAddTask}/>
             </div>
         </div>
     )

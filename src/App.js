@@ -26,6 +26,15 @@ function App() {
         const newList = [...lists, obj];
         setLists(newList);
     };
+    const onAddTask = (listsId, taskObj) => {
+        const newList = lists.map(item => {
+if (item.id === listsId) {
+    item.tasks = [...item.tasks, taskObj];
+}
+    return item;
+        });
+        setLists(newList)
+    };
 
     const onEditListTitle = (id, title) => {
         const newList = lists.map(item => {
@@ -39,6 +48,7 @@ function App() {
 
     return (
         <div className="todo">
+
             <div className="todo__sidebar">
                 <List items={[
                     {
@@ -80,6 +90,7 @@ function App() {
                     <Tasks
                     todo={activeItem}
                     onEditTitle={onEditListTitle}
+                    onAddTask={{onAddTask}}
                     />}
             </div>
         </div>
