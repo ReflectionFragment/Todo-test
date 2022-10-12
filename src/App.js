@@ -28,10 +28,10 @@ function App() {
     };
     const onAddTask = (listsId, taskObj) => {
         const newList = lists.map(item => {
-if (item.id === listsId) {
-    item.tasks = [...item.tasks, taskObj];
-}
-    return item;
+            if (item.id === listsId) {
+                item.tasks = [...item.tasks, taskObj];
+            }
+            return item;
         });
         setLists(newList)
     };
@@ -88,9 +88,9 @@ if (item.id === listsId) {
             <div className="todo__tasks">
                 {lists && lists.length > 0 && activeItem &&
                     <Tasks
-                    todo={activeItem}
-                    onEditTitle={onEditListTitle}
-                    onAddTask={{onAddTask}}
+                        todo={activeItem}
+                        onEditTitle={onEditListTitle}
+                        onAddTask={onAddTask}
                     />}
             </div>
         </div>

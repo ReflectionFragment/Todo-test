@@ -1,16 +1,6 @@
 {
   "lists": [
     {
-      "name": "wrefrefref",
-      "colorId": 4,
-      "id": 2
-    },
-    {
-      "name": "21",
-      "colorId": 4,
-      "id": 3
-    },
-    {
       "name": "143",
       "colorId": 5,
       "id": 4
@@ -26,12 +16,7 @@
       "id": 6
     }
   ],
-  "tasks": [{
-    "id": 4,
-    "listId": 2,
-    "text": "react",
-    "completed": true
-  }],
+  "tasks": [],
   "colors": [
     {
       "id": 1,
