@@ -82,6 +82,11 @@
     background: #d8d8d8;
   }
 
+  &:disabled {
+    background: #525252;
+    color: #007d9f;
+  }
+
   &--grey {
     background: #f4f6f8;
     color: #444444;

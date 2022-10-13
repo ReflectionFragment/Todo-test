@@ -1,9 +1,10 @@
 import React, {useState} from "react";
 import addSvg from '../../assets/img/add.svg';
-
+import axios from "axios";
 const AddTaskForm = ({todo, onAddTask}) => {
     const [VisibleForm, setFormVisible] = useState(false);
-    const [inputValue, setInputValue] = useState(false);
+    const [inputValue, setInputValue] = useState('');
+    const [isLoading, setIsLoading] = useState('');
 
     const toggleFormVisible = () => {
         setFormVisible(!VisibleForm);
@@ -16,10 +17,21 @@ const AddTaskForm = ({todo, onAddTask}) => {
             "text": inputValue,
             "completed": false
         };
-        onAddTask(todo.id, obj);
-
+        setIsLoading(true);
+        axios.post('http://localhost:3001/tasks', obj)
+    .then(({data})=>{
+    console.log(data)
+        onAddTask(todo.id, data);
         toggleFormVisible();
+            }).catch(()=>{
+                alert('Error when adding task!');
+        })
+            .finally(()=>{
+            setIsLoading(false);
+        })
     };
+
+
     return (
         <div className='tasks__form'>
             {!VisibleForm ? (
@@ -37,7 +49,9 @@ const AddTaskForm = ({todo, onAddTask}) => {
                         onChange={e => setInputValue(e.target.value)}
                     />
 
-                    <button onClick={addTask} className='button'>добавить</button>
+                    <button disabled={isLoading} onClick={addTask} className='button'>
+                    {isLoading ? "...Zzz" : "Add" }
+                        </button>
                     <button onClick={toggleFormVisible} className='button button--grey'>отмена</button>
                 </div>)}
         </div>

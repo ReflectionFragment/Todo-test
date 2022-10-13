@@ -52,6 +52,7 @@ function App() {
             <div className="todo__sidebar">
                 <List items={[
                     {
+                        active:true,
                         icon: (<svg width="18"
                                     height="18"
                                     viewBox="0 0 18 18"

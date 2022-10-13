@@ -11,12 +11,49 @@
       "id": 5
     },
     {
-      "name": "234",
-      "colorId": 4,
-      "id": 6
+      "name": "не хуй",
+      "colorId": 5,
+      "id": 7
     }
   ],
-  "tasks": [],
+  "tasks": [
+    {
+      "listId": 5,
+      "text": "134",
+      "completed": false,
+      "id": 2
+    },
+    {
+      "listId": 5,
+      "text": "2345",
+      "completed": false,
+      "id": 3
+    },
+    {
+      "listId": 5,
+      "text": "",
+      "completed": false,
+      "id": 4
+    },
+    {
+      "listId": 5,
+      "text": "2345",
+      "completed": false,
+      "id": 5
+    },
+    {
+      "listId": 5,
+      "text": "2345345",
+      "completed": false,
+      "id": 6
+    },
+    {
+      "listId": 7,
+      "text": "не хуй",
+      "completed": false,
+      "id": 11
+    }
+  ],
   "colors": [
     {
       "id": 1,
